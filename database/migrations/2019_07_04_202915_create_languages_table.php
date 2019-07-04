@@ -20,6 +20,7 @@ class CreateLanguagesTable extends Migration
             $table->string('type');
             $table->string('site');
             $table->integer('year');
+            $table->longText('image');
             $table->string('version');
             $table->timestamps();
         });

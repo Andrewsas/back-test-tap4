@@ -22,6 +22,7 @@ class CreateFrameworksTable extends Migration
             $table->string('site');
             $table->string('version');
             $table->string('against');
+            $table->longText('image');
             $table->string('pro');
             $table->integer('id_language')->unsigned();
             $table->timestamps();

@@ -14,7 +14,7 @@ class CreateFrameworksTable extends Migration
     public function up()
     {
         Schema::create('frameworks', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->string('creator');
             $table->string('type');
@@ -23,8 +23,12 @@ class CreateFrameworksTable extends Migration
             $table->string('version');
             $table->string('against');
             $table->string('pro');
-            $table->integer('id_language')->unsigned()->references( 'languages' )->on('id') ;;
+            $table->integer('id_language')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('frameworks', function($table) {
+            $table->foreign('id_language')->references('id')->on('languages');
         });
 
     }

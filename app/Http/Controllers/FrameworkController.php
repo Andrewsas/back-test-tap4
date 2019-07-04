@@ -18,9 +18,9 @@ class FrameworkController extends Controller
             'type' => ['required'],
             'year' => ['required'],
             'version' => ['required'],
+            'id_language' => ['required'],
             'against' => ['required'],
-            'pro' => ['required'],
-
+            'pro' => ['required']
             ]);
             return $validator;
     }

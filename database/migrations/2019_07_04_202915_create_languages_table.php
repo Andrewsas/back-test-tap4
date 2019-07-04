@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaguagesTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLaguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('laguages', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('creator');
             $table->string('type');
+            $table->string('site');
             $table->bigInteger('year');
             $table->string('version');
             $table->timestamps();

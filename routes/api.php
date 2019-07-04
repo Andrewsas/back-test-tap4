@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* Rotas de CRUD de professores */
+/* Rotas de CRUD de language */
 
 Route::get('/language', ['as' => 'language.listar', 'uses' => 'LaguageController@index']);
 
@@ -29,6 +29,17 @@ Route::put('/language/{id}', ['as' => 'language.editar', 'uses' => 'LaguageContr
 
 Route::delete('/language/{id}', ['as' => 'language.deletar', 'uses' => 'LaguageController@destroy']);
 
+/* Rotas de CRUD de language */
+
+Route::get('/framework', ['as' => 'framework.listar', 'uses' => 'FrameworkController@index']);
+
+Route::get('/framework/{id}', ['as' => 'framework.detalhes', 'uses' => 'FrameworkController@show']);
+
+Route::post('/framework', ['as' => 'framework.salvar', 'uses' => 'FrameworkController@store']);
+
+Route::put('/framework/{id}', ['as' => 'framework.editar', 'uses' => 'FrameworkController@update']);
+
+Route::delete('/framework/{id}', ['as' => 'framework.deletar', 'uses' => 'FrameworkController@destroy']);
 
 Route::get('/', function () {
     return 'welcome';

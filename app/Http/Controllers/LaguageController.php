@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Language;
+use Validator;
+
 
 class LaguageController extends Controller
 {
 
     private function validarLanguage(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name'=> ['required','min:5','max:60'],
-            'creator' => ['required','min:5','max:60'],
+            'name'=> ['required','min:3','max:60'],
+            'creator' => ['required','min:3','max:60'],
             'site' => ['required'],
             'type' => ['required'],
             'year' => ['required'],
@@ -24,12 +26,12 @@ class LaguageController extends Controller
     public function index()
     {
         try {
-            $language = Language::orderBy('id')->get(['id', 'name'])->toArray();
+            $language = Language::orderBy('id')->get()->toArray();
 
-            return response()->json(['success' => true, 'result'=> $language], 200);
+            return response()->json($language, 200);
 
         } catch(\Exception $e) {
-            return response()->json(['success' => false, 'result'=> $e->getMessage()], 500);
+            return response()->json($e->getMessage(), 500);
         }
     }
 
@@ -39,7 +41,7 @@ class LaguageController extends Controller
             $validator = $this->validarLanguage($request);
 
             if ($validator->fails()){
-                return response()->json(['success' => false, 'result'=> 'Erro', 'errors'=> $validator->errors()], 400);
+                return response()->json($validator->errors(), 400);
             }
 
 
@@ -48,12 +50,12 @@ class LaguageController extends Controller
             $language = Language::create($data);
 
             if ($language) {
-                return response()->json(['success' => true, 'result'=> $language], 201);
+                return response()->json($language, 201);
             } else {
-                return response()->json(['success' => false, 'result'=>"Erro ao criar a Language"], 400);
+                return response()->json("Erro ao criar a Language", 400);
             }
         } catch(\Exception $e) {
-            return response()->json(['success' => false, 'result'=> $e->getMessage()], 500);
+            return response()->json( $e->getMessage(), 500);
         }
 
     }
@@ -62,17 +64,17 @@ class LaguageController extends Controller
     {
         try {
             if ($id < 0)
-                return response()->json(['success' => false,  'result'=>'ID informado é inválido!'], 400);
+                return response()->json(['msg' => 'ID informado é inválido!'], 400);
 
             $language = Language::find($id);
 
             if ($language) {
-                return response()->json(['success' => true, 'result'=> $language], 200);
+                return response()->json($language, 200);
             } else {
-                return response()->json(['success' => false, 'result'=> 'Language não encontrado'], 400);
+                return response()->json(['msg' =>'Language não encontrado'], 400);
             }
         } catch(\Exception $e) {
-            return response()->json(['success' => false, 'result'=> $e->getMessage()], 500);
+            return response()->json($e->getMessage(), 500);
         }
     }
 
@@ -80,13 +82,13 @@ class LaguageController extends Controller
     {
         try {
             if ($id < 0){
-                return response()->json(['success' => false,  'result'=>'ID informado é inválido!'], 400);
+                return response()->json(['msg' => 'ID informado é inválido!'], 400);
             }
 
             $validator = $this->validarLanguage($request);
 
             if ($validator->fails()){
-                return response()->json(['success' => false, 'result'=> 'Erro', 'errors'=> $validator->errors()], 400);
+                return response()->json( $validator->errors(), 400);
             }
 
             $data = $request->all();
@@ -97,13 +99,13 @@ class LaguageController extends Controller
 
                 $language->update($data);
 
-                return response()->json(['success' => true, 'result'=> $language ], 204);
+                return response()->json($language, 204);
 
             } else {
-                return response()->json(['success' => false, 'result'=> 'Language não encontrado'], 400);
+                return response()->json(['msg' => 'Language não encontrado'], 400);
             }
         } catch(\Exception $e) {
-            return response()->json(['success' => false, 'result'=> $e->getMessage()], 500);
+            return response()->json($e->getMessage(), 500);
         }
     }
 
@@ -111,7 +113,7 @@ class LaguageController extends Controller
     {
         try {
             if ($id < 0)
-            return response()->json(['success' => false,  'result'=>'ID informado é inválido!'], 400);
+            return response()->json(['msg' => 'ID informado é inválido!'], 400);
 
             $language = Language::find($id);
 
@@ -119,13 +121,13 @@ class LaguageController extends Controller
 
                 $language->delete();
 
-                return response()->json(['success' => true, 'result'=> 'Language deletado com sucesso' ], 200);
+                return response()->json(['msg' => 'Language deletado com sucesso'], 200);
 
             } else {
-                return response()->json(['success' => false, 'result'=> 'Language não encontrado'], 400);
+                return response()->json(['msg' => 'Language não encontrado'], 400);
             }
         } catch(\Exception $e) {
-            return response()->json(['success' => false, 'result'=> $e->getMessage()], 500);
+            return response()->json($e->getMessage(), 500);
         }
     }
 }

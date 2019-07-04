@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Laguage extends Model
+class Language extends Model
 {
-    protected $table = 'language';
+    protected $table = 'languages';
 
     protected $primaryKey = 'id';
 

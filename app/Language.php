@@ -11,6 +11,6 @@ class Language extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name', 'creator', 'site', 'type', 'year', 'version',
+        'name', 'creator', 'site', 'image', 'type', 'year', 'version',
     ];
 }

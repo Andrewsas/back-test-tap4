@@ -26,7 +26,7 @@ class LaguageController extends Controller
     public function index()
     {
         try {
-            $language = Language::orderBy('id')->get()->toArray();
+            $language = Language::orderBy('id')->get(['id', 'name', 'creator', 'version'])->toArray();
 
             return response()->json($language, 200);
 

@@ -31,7 +31,7 @@ class FrameworkController extends Controller
 
             $framework = Framework::orderBy('id')
                             ->with('language')
-                            ->get();
+                            ->get(['id', 'name', 'creator', 'version']);
 
             return response()->json($framework, 200);
 

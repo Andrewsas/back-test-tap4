@@ -11,7 +11,7 @@ class Framework extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name', 'id_language', 'creator', 'site' ,'type' ,'year' ,'version' ,'against' ,'pro'
+        'name', 'id_language', 'creator', 'site' ,'image', 'type' ,'year' ,'version' ,'against' ,'pro'
     ];
 
     public function language() {
